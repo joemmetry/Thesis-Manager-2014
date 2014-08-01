@@ -1,0 +1,30 @@
+application: coe2043-team-17
+version: 7
+runtime: python27
+api_version: 1
+threadsafe: true
+
+handlers:
+- url: /stylesheets
+  static_dir: stylesheets
+  mime_type: text/css
+
+- url: /fonts
+  static_dir: fonts
+  mime_type: application/octet_stream
+
+- url: /js
+  static_dir: js
+  mime_type: text/javascript
+
+- url: /refs
+  static_dir: refs
+
+- url: /.*
+  script: coe2043-team-17.application
+
+libraries:
+- name: webapp2
+  version: latest
+- name: jinja2
+  version: latest

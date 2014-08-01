@@ -1,0 +1,74 @@
+<!DOCTYPE html> {% autoescape true %} 
+<html> 
+	<head> 
+		<meta charset="utf-8" /> 
+		<link type="text/css" rel="stylesheet" href="/stylesheets/graphui-demo.css" /> 
+		<link type="text/css" rel="stylesheet" href="/stylesheets/coe2043.css" /> <script type="text/javascript" src="/js/jquery.js"></script> 
+		<title>Main Page</title> 
+	</head> 
+	<body> 
+		<div id="pageContainer"> 
+			<div id="pageHeader" class="uiHeaderLight"> 
+				<div class="containerMain"> 
+					<div> 
+						<span > 
+							<a href="/"><h5>COE 2043 Team 17</h5></a> 
+						</span>  
+						<span id="buttonAlignment" class="uiDropdown uiDropdown-button pull-right"> 
+							<button class="uiDropdown-selected uiButtonStandard"> {% if user_name %} <b>{{ user_name }} </b> {% else%} Anonymous {% endif %}<i class="uiIcon-hl-chevron-down"></i>
+							</button> 
+							<ul class="uiDropdown-menu pull-right"> 
+								<li><a href="/module-1/1">Profile Template 1</a></li> 
+								<li><a href="/module-1/2">Profile Template 2</a></li> 
+								<li class="divider"></li> 
+								<li><a href="/thesis/list">Thesis List</a></li>
+								<li class="divider"></li> 
+								<li><a href="{{ url|safe }}">{{ url_linktext }}</a></li> 
+							</ul> 
+						</span> 
+					</div> 
+				</div> 
+			</div> 
+			<div id="pageBody"> 
+				<div class="containerMain"> 
+					{% for greeting in greetings %} 
+						{% if greeting.author %} 
+							<b>{{ greeting.author.nickname() }}</b> wrote: 
+						{% else %} 
+							An anonymous person wrote: 
+						{% endif %} 
+					<blockquote class="uiCallout uiCalloutInfo">{{ greeting.content }}</blockquote> 
+					{% endfor %}  
+					<form action="/sign?guestbook_name={{ guestbook_name }}" method="post"> 
+						<div>
+							<textarea name="content" rows="3" cols="60"></textarea>
+						</div> 
+						<div>
+							<input class="uiButtonStandard uiButtonVeryLarge" type="submit" value="Sign Guestbook">
+						</div> 
+					</form>  
+					<hr> 
+					<form> 
+						<div class="uiButtonAppend"> 
+							<span class="textAppended"><i class="uiIcon-gi-pencil"></i> Guestbook name</span> 
+							<input type="text" value="{{ guestbook_name }}" name="guestbook_name"> 
+							<input class="uiButton" type="submit" value="switch"> 
+						</div> 
+					</form> 
+				</div> 
+			</div> 
+		</div> 
+		<script type="text/javascript" src="/js/coeteam17.js"></script> 
+		<!--<script type="text/javascript">
+			$(document).ready(function($){
+				$.graphModal({
+					type : 'message',
+					keyboard : 'true',
+					title : 'Thesis List',
+					content : 'The thesis section of this website is available yet still under development.'
+				});
+			});
+		</script>-->
+	</body> 
+</html> 
+{% endautoescape %}

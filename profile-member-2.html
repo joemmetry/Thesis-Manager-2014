@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html  >
+	<meta charset="utf-8"/>
+	<link type="text/css" rel="stylesheet" href="/stylesheets/graphui-demo.css" />
+	<link type="text/css" rel="stylesheet" href="/stylesheets/coe2043.css" />
+	<script type="text/javascript" src="/js/jquery.js"></script>
+<head>
+	<title > Profile - Mampusti</title>
+</head>
+<body>
+	<div id="pageContainer">
+		<img src = "http://wallpaper.pickywallpapers.com/1600x900/gray-3d-city.jpg" style = "z-index: -999;
+			  min-height: 100%;
+			  min-width: 1024px;
+			  width: 100%;
+			  height: auto;
+			  position: fixed;
+			  top: 0;
+			  left: 0;" >
+			 
+		<div id="pageHeader" class="uiHeaderDark">
+			<div class="containerMain">
+				<div>
+					<span >
+					<a href="/"><h5>COE 2043 Team 17</h5></a>
+					</span>
+				
+					<span id="buttonAlignment" class="uiDropdown uiDropdown-button pull-right">
+						<button class="uiDropdown-selected uiButtonStandard"> {% if user_name %}
+	     			   <b>{{ user_name }} </b> 
+	     			  {% else%}
+	     			  	Anonymous
+	       			 {% endif %}<i class="uiIcon-hl-chevron-down"></i></button>
+	       			 	<ul class="uiDropdown-menu pull-right">
+	       			 		<li><a href="/">Home</a></li>
+	       			 		<li><a href="/module-1/1">Profile Template 1</a></li>
+	       			 		<li class="divider"></li>
+	       			 		<li><a href="{{ url|safe }}">{{ url_linktext }}</a></li>
+	       			 	</ul>
+					</span>
+				</div>
+			</div>
+		</div>
+		<div id="pageBody">
+			<div class="containerMain">
+				<div style="margin-left:20px">
+						<h3 style= "color:#FFFFFF;margin-top:100px;margin-left:20px"> Abrian Mampusti </h3>
+						<img src = "https://fbcdn-profile-a.akamaihd.net/hprofile-ak-xfa1/t1.0-1/c27.0.160.160/p160x160/406624_3535174957887_1310839028_n.jpg" style="margin-left:20px">
+						<p style= "color:#FFFFFF;margin-right:100px"> <em>"Be wise enough to fuel up your success with failures. "</em></p>
+
+				</div>
+				<div style = "margin-right:100px;margin-left:250px;position:relative;">
+					<p style= "color:#FFFFFF;font-size:16px;margin:5px"><strong>About Me</strong> </p>
+					<p style= "color:#FFFFFF;">	Fifth year student taking up </br>Computer Engineering.</p>
+				</div>
+				<div style="margin-right:100px;margin-left:250px;position:relative;">
+					<table>	
+						<tr> 
+							<td style= "color:#FFFFFF"> <strong> Contact Number- </strong></td>
+							<td style="text-align:left;color:#FFFFFF">+639058418516</td>
+						</tr>
+						<tr>
+							<td style= "color:#FFFFFF"> <strong>E-mail Address- </strong> </td>
+							<td style= "color:#FFFFFF"> abrian.mampusti19@gmail.com</td>
+						</tr>
+					</table>
+				</div>
+				<h4 style= "color:#FFFFFF">Social networking links:	</h4>
+				<table>
+					<tr>
+					 	<td>
+					 		<a href ="http://www.facebook.com/eybriyan" target="_blank"><img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQe-C1HwZdYkK_IbsZtGAali7eZak3ngAi49up2gU-VWk4VNLQVcHESeg" width = "32" height = "32"></a>
+					 	</td>
+					 	<td><a href = "http://github.com/eybriyan" target="_blank"> <img src ="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcR-qS9i9xI0RMoC17kMcYEtf6_yJvMwg904NFcOfE99Fk77-CjbDX0oRQ" width="32" height="32"></a>	</td>
+					 	<td> <a href = "http://twitter.com/eybriyan" target="_blank"> <img src = "http://nickbaines.files.wordpress.com/2009/10/twitter-logo-1.jpg" width="32" height=" 32"></a></td>
+					 	<td>	<a href = "http://codecademy.com/eybriyan" target="_blank"> <img src = "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTcGzeQNrhGGG6-pwEXSQZEO2WVKVTr1_-d-JKSUvD04n4fQeLjnlcrZYtd" height="25" width = "110"></a></td>
+					</tr> 
+				</table>
+				<p style= "color:#FFFFFF;font-size:16px;margin-left:15px">Hi! Good Day!</p>
+				<form action="/post?guestbook_name={{ guestbook_name }}" method="post">
+				      <div><textarea name="content" rows="3" cols="60"></textarea></div>
+				      <div><input type="submit" value="Comment"></div>
+			    </form>
+			    <div style="color:#f3f1e9">
+			    	{% for greeting in greetings %}	
+			      			{% if greeting.author %}
+			      		<div style="margin-bottom:20px">
+			      				<b>{{ greeting.author.nickname() }} wrote:</b><br>
+				      		{% else %}
+				      	<div style="margin-bottom:20px">
+			      			
+				       			Anonymous wrote:<br>
+				      		{% endif %}
+				      		
+			      			{{ greeting.content }}
+			      		</div>
+			    	{% endfor %}
+			    </div>
+			</div>
+		</div>
+		<div id="pageFooter"></div>
+	</div>
+	<script type="text/javascript" src="/js/coeteam17.js"></script>		
+</body>
+</html>	

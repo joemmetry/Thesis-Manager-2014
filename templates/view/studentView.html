@@ -1,0 +1,105 @@
+<!DOCTYPE html> {% autoescape true %} 
+<html> 
+	<head> 
+		<meta charset="utf-8" /> 
+		<link type="text/css" rel="stylesheet" href="/stylesheets/graphui-demo.css" /> 
+		<link type="text/css" rel="stylesheet" href="/stylesheets/coe2043.css" /> 
+		<script type="text/javascript" src="/js/jquery.js"></script> 
+		<title>{% for list in studentList %} {% if (list.key.id() == id) %}{{ list.student_title }} {{ list.student_firstname }} {{ list.student_lastname }}{% endif %} {% endfor %}</title> 
+	</head> 
+	<body> 
+		<div id="pageContainer"> 
+			<div id="pageHeader" class="uiHeaderDark"> 
+				<div class="containerMain"> 
+					<span > 
+							<a href="/"><h5>University Information System</h5></a> 
+						</span>
+						<span id="buttonAlignment" class="uiDropdown uiDropdown-button pull-right"> 
+						{% if user_name%}  
+							<button class="uiDropdown-selected uiButtonStandard"> {% if user_name %} <b>{{ user_name }} </b> {% else%} Anonymous {% endif %}<i class="uiIcon-hl-chevron-down"></i>
+							</button> 
+							<ul class="uiDropdown-menu pull-right"> 
+								<li><a href="/">Home</a></li>
+								<li class="divider"></li>
+								<li class="uiDropdown-submenu pull-left">
+				                    <a tabindex="-1" href="#">Thesis</a>
+				                    <ul class="uiDropdown-menu">
+				                      <li><a tabindex="-1" href="/thesis/new">New Thesis</a></li>
+				                      <li><a tabindex="-1" href="/thesis/list">Thesis List</a></li>
+				                    </ul>
+				                </li>
+				                <li class="uiDropdown-submenu pull-left">
+				                    <a tabindex="-1" href="#">Student</a>
+				                    <ul class="uiDropdown-menu">
+				                      <li><a tabindex="-1" href="/student/new">New Student</a></li>
+				                      <li><a tabindex="-1" href="/student/list">Student List</a></li>
+				                    </ul>
+				                </li>
+				                <li class="uiDropdown-submenu pull-left">
+				                    <a tabindex="-1" href="#">Adviser</a>
+				                    <ul class="uiDropdown-menu">
+				                      <li><a tabindex="-1" href="/student/new">New Adviser</a></li>
+				                      <li><a tabindex="-1" href="/student/list">Adviser List</a></li>
+				                    </ul>
+				                </li>
+								<li class="divider"></li> 
+								<li><a href="{{ url|safe }}">{{ url_linktext }}</a></li> 
+							</ul> 
+						{% else %}
+							<button class="uiDropdown-selected uiButtonStandard"> {% if user_name %} <b>{{ user_name }} </b> {% else%} Anonymous {% endif %}<i class="uiIcon-hl-chevron-down"></i>
+							</button> 
+							<ul class="uiDropdown-menu pull-right"> 
+								<li><a href="/">Home</a></li>
+								<li class="divider"></li> 
+								<li class="uiDropdown-submenu pull-left">
+				                    <a tabindex="-1" href="#">Thesis</a>
+				                    <ul class="uiDropdown-menu">
+				                      <li><a tabindex="-1" href="/thesis/list">Thesis List</a></li>
+				                    </ul>
+				                </li>
+				                <li class="uiDropdown-submenu pull-left">
+				                    <a tabindex="-1" href="#">Student</a>
+				                    <ul class="uiDropdown-menu">
+				                      <li><a tabindex="-1" href="/student/list">Student List</a></li>
+				                    </ul>
+				                </li>
+				                <li class="uiDropdown-submenu pull-left">
+				                    <a tabindex="-1" href="#">Adviser</a>
+				                    <ul class="uiDropdown-menu">
+				                      <li><a tabindex="-1" href="/student/list">Adviser List</a></li>
+				                    </ul>
+				                </li>
+								<li class="divider"></li> 
+								<li><a href="{{ url|safe }}">{{ url_linktext }}</a></li> 
+							</ul>
+						{% endif %}
+						</span> 
+				</div> 
+			</div> 
+			<div id="pageBody"> 
+				<div id="HomeBackground" style="background-image: url('/refs/wall6.jpg');"></div>
+				<div class="containerMain"> 
+					{% for list in studentList %}
+					{% if (list.key.id() == id) %}
+						<div class="uiPageHeader">
+							<h1>{{ list.student_firstname }} {{ list.student_lastname }}<small class="small"> from {{list.student_dept}} </small></h1>
+						</div>
+						<div>
+							<h3>Details:</h3>
+							<p class="span12 uiAlignJustify">
+								Student Number: {{list.student_number}}<br>
+								Email: {{list.student_email}}<br>
+								Remarks: {{list.student_remarks}}<br>
+							</p>
+						</div>
+					{% endif %}
+					{% endfor %}
+					<button class="uiButtonVeryLarge uiButtonStandard" onclick="window.location.href = '/student/new'"><i class="uiIcon-gi-user_add"></i> New Student</button>
+					<button class="uiButtonVeryLarge" onclick="history.back()"><i class="uiIcon-gi-show_lines"></i> Back to the List</button>
+				</div> 
+			</div> 
+		</div> 
+		<script type="text/javascript" src="/js/coeteam17.js"></script> 
+	</body> 
+</html> 
+{% endautoescape %}

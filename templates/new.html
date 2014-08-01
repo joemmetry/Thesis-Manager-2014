@@ -1,0 +1,322 @@
+<!DOCTYPE html> {% autoescape true %} 
+<html> 
+	<head> 
+		<meta charset="utf-8" /> 
+		<link type="text/css" rel="stylesheet" href="/stylesheets/graphui-demo.css" /> 
+		<link type="text/css" rel="stylesheet" href="/stylesheets/coe2043.css" /> 
+		<script type="text/javascript" src="/js/jquery.js"></script> 
+		<title>New {{formtype.capitalize()}}</title> 
+	</head> 
+	<body> 
+		<div id="HomeBackground" style="background-color:#f3f1e9;background-image: url('/refs/wall1.jpg')"></div>
+		<div id="pageContainer"> 
+			<div id="pageHeader" class="uiHeaderDark"> 
+				<div class="containerMain"> 
+					<div> 
+						<span > 
+							<a href="/"><h5>University Information System</h5></a> 
+						</span>
+						<span id="buttonAlignment" class="uiDropdown uiDropdown-button pull-right" > 
+							<button  class="uiDropdown-selected uiButtonStandard"> {% if user_name %} <b>{{ user_name }} </b> {% else%} Anonymous {% endif %}<i class="uiIcon-hl-chevron-down"></i>
+							</button> 
+							<ul class="uiDropdown-menu pull-right"> 
+								<li><a href="/">Home</a></li>
+								<li class="divider"></li>
+								<li class="uiDropdown-submenu pull-left">
+				                    <a tabindex="-1" href="#">Thesis</a>
+				                    <ul class="uiDropdown-menu">
+				                      {% if user_name%}<li><a tabindex="-1" href="/thesis/new">New Thesis</a></li>{% endif %}
+				                      <li><a tabindex="-1" href="/thesis/list">Thesis List</a></li>
+				                    </ul>
+				                </li>
+				                <li class="uiDropdown-submenu pull-left">
+				                    <a tabindex="-1" href="#">Student</a>
+				                    <ul class="uiDropdown-menu">
+				                      {% if user_name%}<li><a tabindex="-1" href="/student/new">New Student</a></li>{% endif %}
+				                      <li><a tabindex="-1" href="/student/list">Student List</a></li>
+				                    </ul>
+				                </li>
+				                <li class="uiDropdown-submenu pull-left">
+				                    <a tabindex="-1" href="#">Adviser</a>
+				                    <ul class="uiDropdown-menu">
+				                      {% if user_name%}<li><a tabindex="-1" href="/adviser/new">New Adviser</a></li>{% endif %}
+				                      <li><a tabindex="-1" href="/adviser/list">Adviser List</a></li>
+				                    </ul>
+				                </li>
+								<li class="divider"></li> 
+								<li><a href="{{ url|safe }}">{{ url_linktext }}</a></li> 
+							</ul>
+						</span>
+					</div> 
+				</div> 
+			</div> 
+			<div id="pageBody" > 
+				<!--<div id="HomeBackground" style="background-image: url('/refs/wall1.jpg');"></div>-->
+				<div class="containerMain"> 
+				{% if user_name %}
+					<div><center><h3>Fill up the fields below to create a new {{formtype}} entry.</h3><center></div>
+					{% if formtype == 'adviser' %}
+						<div id="gn-thesis" class="span8" style="margin:0 auto">
+							<form method="post" action="">
+								<input type="hidden" value="{{ user_name }}" name="author">
+								<div class="gridCol-12 gridCol-child">
+									<div class="span2 gridAsLabel"><strong>Title</strong></div>
+									<div class="span3"><select class="span2"  name="adviser_title" >
+										<option value="Mr.">Mr.</option>
+										<option value="Ms.">Ms.</option>
+										<option value="Mrs.">Mrs.</option>
+										<option value="Dr.">Dr.</option>
+										<option value="Engr.">Engr.</option>
+									</select></div>
+								</div>
+								<div class="gridCol-12 gridCol-child">
+									<div class="span2 gridAsLabel"><strong>First Name</strong></div>
+									<div class="span3"><input class="span4" type="text" name="adviser_firstname" /></div>
+								</div>
+								<div class="gridCol-12 gridCol-child">
+									<div class="span2 gridAsLabel"><strong>Last Name</strong></div>
+									<div class="span3"><input class="span4" type="text" name="adviser_lastname" /></div>
+								</div>
+								<div class="gridCol-12 gridCol-child">
+									<div class="span2 gridAsLabel"><strong>Email</strong></div>
+									<div class="span3"><input class="span4" type="email" name="adviser_email" /></div>
+								</div>
+								<div class="gridCol-12 gridCol-child">
+									<div class="span2 gridAsLabel"><strong>Phone number</strong></div>
+									<div class="span3"><input class="span4" type="text" name="adviser_phone" /></div>
+								</div>
+								<div class="gridCol-12 gridCol-child">
+									<div class="span2 gridAsLabel"><strong>Department</strong></div>
+									<div class="span3"><select class="span4"  name="adviser_dept" >
+										<option value="Computer Engineering">Computer Engineering</option>
+										<option value="Electronics and Communication Engineering">Electronics and Communication Engineering</option>
+										<option value="Electrical Engineering">Electrical Engineering</option>
+										<option value="Industrial Engineering">Industrial Engineering</option>
+										<option value="Mechanical Engineering">Mechanical Engineering</option>
+										<option value="Civil Engineering">Civil Engineering</option>
+									</select></div>
+								</div>
+								<div class="gridCol-12 gridCol-child ">
+									<div class="span2"></div>
+									<div class="span5">
+										<button id="adviser_submit" type="submit" class="uiButtonVeryLarge uiButtonStandard"><i class="uiIcon-hl-send"></i> Submit</button>
+										<button type="reset" class="uiButtonVeryLarge"><i class="uiIcon-gi-refresh"></i> Reset</button>
+										<button id="adviser_list" class="uiButtonVeryLarge"><i class="uiIcon-gi-show_lines"></i> Adviser List</button>
+									</div>
+								</div>
+							</form>
+							<script type="text/javascript">
+								function checkInput(){
+									if($('input[name*="firstname"]').val() == "" || $('input[name*="lastname"]').val() == "" || $('input[name*="email"]').val() == "" || $('input[name*="phone"]').val() == "" ){
+										return false;
+									}
+									else{return true;}
+								}
+								$(document).ready(function(e){
+									$('input[name="adviser_phone"]').keydown(function(e){
+										return isNumberKey(e);
+									});
+									$('#adviser_submit').click(function(e){
+										e.preventDefault();
+										$email = $('input[name*="email"]').val();
+										if(!checkInput()){
+											$.graphModal({
+												theme: 'dark',
+												title: 'Empty Fields',
+												content: 'Make sure all fields are not empty. Please try again.'
+											});
+										}
+										else if(!isEmail($email)){
+											$.graphModal({
+												theme: 'dark',
+												title: 'Email Invalid',
+												content: 'Email you have entered is not valid. Please try again.'
+											});
+										}
+										else{$('form').submit();}
+									});
+								});
+							</script>
+						</div>
+					{% elif formtype == 'thesis'%}
+						<div id="gn-thesis" class="gridCol-12">
+							<form method="post" action="">
+								<input type="hidden" value="{{ user_name }}" name="author">
+								<div class="gridCol-12 gridCol-child">
+									<div class="span3 gridAsLabel"><strong>Thesis Title</strong></div>
+									<div class="span9"><input class="span9" type="text" name="thesis_title" /></div>
+								</div>
+								<div class="gridCol-12 gridCol-child">
+									<div class="span3 gridAsLabel"><strong>Thesis Desription</strong></div>
+									<div class="span9"><textarea class="span9" type="text" name="thesis_desc" ></textarea></div>
+								</div>
+								<div class="gridCol-12 gridCol-child">
+									<div class="span3 gridAsLabel"><strong>School Year</strong></div>
+									<div class="span9"><select class="span2" name="thesis_year"></select></div>
+								</div>
+								<div class="gridCol-12 gridCol-child">
+									<div class="span3 gridAsLabel"><strong>Status</strong></div>
+									<div class="span9">
+										<label class="uiRadioInline">
+											<input type="radio" value="Active" name="thesis_status" checked="checked">
+											Active
+										</label>
+										<label class="uiRadioInline">
+											<input type="radio" value="Inactive" name="thesis_status">
+											Inactive
+										</label>
+										<label class="uiRadioInline">
+											<input type="radio" value="For Removal" name="thesis_status">
+											For Removal
+										</label>
+									</div>
+								</div>
+								<div class="gridCol-12 gridCol-child ">
+									<div class="span3"></div>
+									<div class="span9">
+										<button id="thesis_submit" type="submit" class="uiButtonVeryLarge uiButtonStandard"><i class="uiIcon-hl-send"></i> Submit</button>
+										<button type="reset" class="uiButtonVeryLarge"><i class="uiIcon-gi-refresh"></i> Reset</button>
+										<button id="thesis_list" class="uiButtonVeryLarge"><i class="uiIcon-gi-show_lines"></i> Thesis List
+									</div>
+								</div>
+							</form>
+							<script type="text/javascript">
+								function checkInput(){
+									if($('input[name*="title"]').val() == "" || $('textarea[name*="desc"]').val() == ""){
+										return false;
+									}
+									else{return true;}
+								}
+								$(document).ready(function(e){
+									$a = new Date().getFullYear() - 40;
+									console.log($a);
+									$b = $('[name="thesis_year"]');
+									for(var $c = $a; $c<=$a+40; $c++){
+										var $d = new Option();
+										var $e = $c + '-' + ($c+1);
+										$d.value = $d.text = $e;
+										if($c == $a+40){$d.selected = true;}
+										$b.append($d);
+									}
+									$('#thesis_submit').click(function(e){
+										e.preventDefault();
+										if(!checkInput()){
+											$.graphModal({
+												theme: 'dark',
+												title: 'Empty Fields',
+												content: 'Make sure all fields are not empty. Please try again.'
+											})
+										}
+										else{$('form').submit();}
+									});
+								});
+							</script>
+						</div>
+					{% elif formtype == 'student' %}
+						<div id="gn-thesis" class="gridCol-12">
+							<form method="post" action="">
+								<input type="hidden" value="{{ user_name }}" name="author">
+								<div class="gridCol-12 gridCol-child">
+									<div class="span3 gridAsLabel"><strong>First Name</strong></div>
+									<div class="span9"><input class="span6" type="text" name="student_firstname" /></div>
+								</div>
+								<div class="gridCol-12 gridCol-child">
+									<div class="span3 gridAsLabel"><strong>Last Name</strong></div>
+									<div class="span9"><input class="span6" type="text" name="student_lastname" /></div>
+								</div>
+								<div class="gridCol-12 gridCol-child">
+									<div class="span3 gridAsLabel"><strong>Student Number</strong></div>
+									<div class="span9"><input class="span6" type="text" name="student_number" /></div>
+								</div>
+								<div class="gridCol-12 gridCol-child">
+									<div class="span3 gridAsLabel"><strong>Email</strong></div>
+									<div class="span9"><input class="span6" type="text" name="student_email" /></div>
+								</div>
+								<div class="gridCol-12 gridCol-child">
+									<div class="span3 gridAsLabel"><strong>Department</strong></div>
+									<div class="span3"><select class="span3"  name="student_dept" >
+										<option value="Computer Engineering">Computer Engineering</option>
+										<option value="Electronics and Communication Engineering">Electronics and Communication Engineering</option>
+										<option value="Electrical Engineering">Electrical Engineering</option>
+										<option value="Industrial Engineering">Industrial Engineering</option>
+										<option value="Mechanical Engineering">Mechanical Engineering</option>
+										<option value="Civil Engineering">Civil Engineering</option>
+									</select></div>
+								</div>
+								<div class="gridCol-12 gridCol-child">
+									<div class="span3 gridAsLabel"><strong>Remarks</strong></div>
+									<div class="span6"><textarea class="span9" type="text" name="student_remarks" ></textarea></div>
+								</div>
+								<div class="gridCol-12 gridCol-child ">
+									<div class="span3"></div>
+									<div class="span9">
+										<button id="student_submit" type="submit" class="uiButtonVeryLarge uiButtonStandard"><i class="uiIcon-hl-send"></i> Submit</button>
+										<button type="reset" class="uiButtonVeryLarge"><i class="uiIcon-gi-refresh"></i> Reset</button>
+										<button id="student_list" class="uiButtonVeryLarge"><i class="uiIcon-gi-show_lines"></i> Student List
+									</div>
+								</div>
+							</form>
+						</div>
+						<script type="text/javascript">
+							function checkInput(){
+								if($('input[name*="firstname"]').val() == "" || $('input[name*="lastname"]').val() == "" || $('input[name*="email"]').val() == "" || $('input[name*="number"]').val() == "" || $('textarea[name*="remarks"]').val() == "" ){
+									return false;
+								}
+								else{return true;}
+							}
+
+							$(document).ready(function(e){
+								$('#student_submit').click(function(e){
+									e.preventDefault();
+									$email = $('input[name*="email"]').val();
+									if(!checkInput()){
+										$.graphModal({
+											theme: 'dark',
+											title: 'Empty Fields',
+											content: 'Make sure all fields are not empty. Please try again.'
+										});
+									}
+									else if(!isEmail($email)){
+										$.graphModal({
+											theme: 'dark',
+											title: 'Email Invalid',
+											content: 'Email you have entered is not valid. Please try again.'
+										});
+									}
+									else{$('form').submit();}
+								});
+							});
+						</script>
+					{% endif %}
+				{% else %}
+					<div id="HomeBackground" style="background-color:rgb(217,94,27);background-image: url('/refs/wall2.jpg')"></div>
+					
+					<div class="gn-thesisMsg">
+						<div class="gn-thesisHdr">:(</div>
+						<div class="gn-thesisCon">
+							<p>Creating {{formtype}} entries is not allowed unless you're signed in. If you wish to browse the list without signing in, click <a href="/{{formtype}}/list">here</a>.
+							</p>
+						</div>
+						<br>
+						<div>
+							<p>If you like to login, click Anonymous on the top-right side of the page then click Login.</p>
+						</div>
+					</div>
+				{% endif %}
+				</div>
+				<div class="clearfix"></div> 
+			</div>
+		</div> 
+		<script type="text/javascript" src="/js/coeteam17.js"></script> 
+		<script type="text/javascript">
+			$(document).ready(function(e){
+				
+				$('#{{formtype}}_list').click(function(e){
+					e.preventDefault();
+					window.location.href = "/{{formtype}}/list";
+				});
+			})
+		</script>
+	</body> 
+</html> 
+{% endautoescape %}

@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+{% autoescape true %}
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<link type="text/css" rel="stylesheet" href="/stylesheets/graphui-demo.css" />
+	<link type="text/css" rel="stylesheet" href="/stylesheets/coe2043.css" />
+	<script type="text/javascript" src="/js/jquery.js"></script>
+	<title>Joem | Profile</title>
+</head>
+<body>
+	<div id="pageContainer">
+		<div id="pageHeader" class="uiHeaderDark">
+			<div class="containerMain">
+				<div>
+					<span >
+					<a href="/"><h5>COE 2043 Team 17</h5></a>
+					</span>
+				
+					<span id="buttonAlignment" class="uiDropdown uiDropdown-button pull-right">
+						<button class="uiDropdown-selected uiButtonStandard"> {% if user_name %}
+	     			   <b>{{ user_name }} </b> 
+	     			  {% else%}
+	     			  	Anonymous
+	       			 {% endif %}<i class="uiIcon-hl-chevron-down"></i></button>
+	       			 	<ul class="uiDropdown-menu pull-right">
+	       			 		<li><a href="/">Home</a></li>
+	       			 		<li><a href="/module-1/2">Profile Template 2</a></li>
+	       			 		<li class="divider"></li>
+	       			 		<li><a href="{{ url|safe }}">{{ url_linktext }}</a></li>
+	       			 	</ul>
+					</span>
+				</div>
+			</div>
+		</div>
+		<div id="pageBody" class="gn-profiler">
+			<div class="gn-profilerCover">
+				<div>
+					<div class="gn-profileImg">
+						<img src="https://fbcdn-sphotos-d-a.akamaihd.net/hphotos-ak-xpa1/t1.0-9/10084_10200630841892872_1843543253_n.jpg" alt="Joseph Petilla">
+					</div>
+					<label class="gn-profileName">Joseph Emmanuel Petilla
+					<div class="gn-profiletagLine">&quot;Sleep is for the weak therefore work hard, play harder&quot;</div>
+					</label>
+				</div>
+			</div>
+			<div class="gn-profilerNav">
+				<div>
+					<ul id="gn-profilerNav-tabs" class="uiNav uiNav-pills">
+						<li class="active"><a href="" data-target="signbook"><i class="uiIcon-hl-list"></i> Signbook</a></li>
+						<li><a href="" data-target="about"><i class="uiIcon-hl-user"></i> About</a></li>
+						<li><a href="" data-target="contact"><i class="uiIcon-gi-vcard"></i> Contact</a></li>
+						<li class="uiDropdown uiDropdown-button ">
+					    	<a class="uiDropdown-selected">More <i class="uiIcon-hl-chevron-down"></i></a>
+							<ul class="uiDropdown-menu" role="menu" aria-labelledby="dropdownMenu" style="margin-right: 20px">
+			                  <li><a tabindex="-1" href="#"><i class="uiIcon-gi-group"></i>&nbsp;Coming soon</a></li>
+			                  
+			                </ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="gn-profilerContent">
+				<div class=" gridCol-12">
+					<div class="gridCol-10">
+						<div id="gn-profilerPost">
+							<div id="gn-tabs">
+								<div id="about">
+									<h3>About me:</h3>
+									<p>I am currently taking up Bachelor of Science in computer Engineering in Polytechnic University of the Phillipines. Has basic knowledge of software development with Java, PHP, HTML, XML, JavaScript, jQuery, Spring. Fond of watching animes though I understand some of their languages like これウェブサイトは素敵でしょう?　Loves also to play games like the Need For Speed™ series, and RTS games.</p>
+								</div>
+								<div id="contact">
+									<h3>Contact Details:</h3>
+									<div><strong>Phone: </strong><span>+63 905-898-2556</span></div>
+									<div><strong>Email: </strong><span>josephemmanuel.petilla@pup.edu.ph</span></div>
+									<div><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong><span>josephemmanuel.petilla@hotmail.com</span></div>
+									<div><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong><span>josephemmanuel.petilla@gmail.com</span></div>
+									<div><strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </strong><span>joem_potchi27@yahoo.com</span></div>
+								</div>
+								<div id="signbook" class="active">
+									<form action="/post?guestbook_name={{ guestbook_name }}" method="post">
+								      <div><textarea placeholder="Say something..." name="content" rows="3" cols="60"></textarea></div>
+								      <div style="border:1px #a8a8a8 solid;margin-top:-10px;height:45px;padding:1px 10px;">
+										&nbsp;
+										<span class="pull-right uiButtonAppend" style="margin-top:8px">
+											<input class="" type="submit" value="Signbook">
+										</span>
+									  </div>
+								    </form>
+								    <div>
+								    	{% for greeting in greetings %}
+								      		
+								      			{% if greeting.author %}
+								      		<div class="uiCallout uiCalloutWarning">
+								      			<h4>
+									        		<b>{{ greeting.author.nickname() }}</b>
+									      		{% else %}
+									      	<div class="uiCallout uiCalloutError">
+								      			<h4>
+									       			Anonymous
+									      		{% endif %}
+									      		</h4>
+								      			{{ greeting.content }}
+								      		</div>
+								    	{% endfor %}
+								    </div>
+									<button class="" style="width:100%">Load More</button>
+								</div>
+							</div>
+							<script type="text/javascript">
+								$(document).ready(function(e) {
+									$('#gn-profilerNav-tabs li').click(function(e){
+										e.preventDefault();
+
+										var target = $(this).children().data('target');
+										if(!$(this).hasClass('active') && target !=null){
+											$('#gn-profilerNav-tabs li').removeClass('active');
+											$(this).addClass('active');
+											target = '#' + target;
+											$('#gn-tabs > div').fadeOut(100);
+											$(target).fadeIn(200);
+										}
+									});
+								});
+							</script>
+						</div>
+					</div>
+					<div class="gridCol-2">
+						<!--<div class="" style="">
+							<ul class="uiNav uiNav-list well">
+								<li class="uiNav-header">History</li>
+								<li><a href="">2014</a></li>
+								<li><a href="">2013</a></li>
+								<li class="divider"></li>
+								<li><a href="">Load previous</a></li>
+								<li class="divider"></li>
+								<li class="uiNav-header">Filters</li>
+								<li class="active"><a href="">All</a></li>
+								<li><a href="">Posts</a></li>
+								<li><a href="">Files</a></li>
+								<li><a href="">Events</a></li>
+								<li><a href="">Products</a></li>
+							</ul>
+						</div>-->
+					</div>
+				</div>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+		<div id="pageFooter" class="uiHeaderLight">
+			<div class="containerMain">
+				<div class="">
+					<div id="gn-ftr-gbname" class="" style="display:none">
+						<form>
+					      <div class="uiButtonAppend">
+					      	  <span class="textAppended"><i class="uiIcon-gi-pencil"></i> Guestbook name</span>
+						      <input type="text" value="{{ guestbook_name }}" name="guestbook_name">
+						      <input class="uiButton" type="submit" value="switch">
+					      </div>
+					    </form>
+					</div>
+					<div id="gn-ftr-social" class="gridCol-offset-7">
+						<span>Reach me with these accounts
+							<a href="http://www.facebook.com/joempetilla.27"><i class="uiIcon-so-facebook" alt="facebook"> </i> Facebook</a>
+							<a href="https://plus.google.com/u/0/113073898720167804227"><i class="uiIcon-so-google_plus" alt="google"> </i> Google+</a>
+							<a href="http://www.github.com/joemscore27"><i class="uiIcon-so-github" alt="github"> </i> GitHub</a>	
+						</span>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="/js/coeteam17.js"></script>
+</body>
+</html>
+{% endautoescape %}

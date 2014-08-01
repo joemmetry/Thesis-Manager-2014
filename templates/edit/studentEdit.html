@@ -1,0 +1,102 @@
+<div id="pageContainer" style="border-top: 1px #AAA solid"> 
+	<div id="pageBody" > 
+		<div class="containerMain"> 
+		{% if user_name %}
+			{% for list in studentList %}
+			{% if (list.key.id() == id) %}
+				<div id="gn-thesis" class="gridCol-12">
+					<form method="post" action="/student/edit/{{id}}">
+						<input type="hidden" value="{{ user_name }}" name="author">
+						<div class="gridCol-12 gridCol-child">
+							<div class="span3 gridAsLabel"><strong>First Name</strong></div>
+							<div class="span9"><input class="span6" type="text" name="student_firstname" value="{{ list.student_firstname}}" /></div>
+						</div>
+						<div class="gridCol-12 gridCol-child">
+							<div class="span3 gridAsLabel"><strong>Last Name</strong></div>
+							<div class="span9"><input class="span6" type="text" name="student_lastname" value="{{ list.student_lastname}}" /></div>
+						</div>
+						<div class="gridCol-12 gridCol-child">
+							<div class="span3 gridAsLabel"><strong>Student Number</strong></div>
+							<div class="span9"><input class="span6" type="text" name="student_number" value="{{ list.student_number}}" /></div>
+						</div>
+						<div class="gridCol-12 gridCol-child">
+							<div class="span3 gridAsLabel"><strong>Email</strong></div>
+							<div class="span9"><input class="span6" type="text" name="student_email" value="{{ list.student_email}}" /></div>
+						</div>
+						<div class="gridCol-12 gridCol-child">
+							<div class="span3 gridAsLabel"><strong>Department</strong></div>
+							<div class="span3"><select class="span3"  name="student_dept" >
+								<option value="Computer Engineering">Computer Engineering</option>
+								<option value="Electronics and Communication Engineering">Electronics and Communication Engineering</option>
+								<option value="Electrical Engineering">Electrical Engineering</option>
+								<option value="Industrial Engineering">Industrial Engineering</option>
+								<option value="Mechanical Engineering">Mechanical Engineering</option>
+								<option value="Civil Engineering">Civil Engineering</option>
+							</select></div>
+							<script type="text/javascript">
+								if($('[name="student_dept] option').val() == "{{list.student_dept }}"){
+									$(this).attr('selected','selected');
+								}
+							</script>
+						</div>
+						<div class="gridCol-12 gridCol-child">
+							<div class="span3 gridAsLabel"><strong>Remarks</strong></div>
+							<div class="span6"><textarea class="span9" type="text" name="student_remarks" style="max-height:200px" >{{list.student_remarks}}</textarea></div>
+						</div>
+						<div class="gridCol-12 gridCol-child ">
+							<div class="span3"></div>
+							<div class="span9">
+								<button id="student_submit" type="submit" class="uiButtonVeryLarge uiButtonStandard"><i class="uiIcon-hl-send"></i> Submit</button>
+								<button type="reset" class="uiButtonVeryLarge"><i class="uiIcon-gi-refresh"></i> Reset</button>
+								<button id="student_list" class="uiButtonVeryLarge"><i class="uiIcon-gi-show_lines"></i> Student List</button>
+							</div>
+						</div>
+					</form>
+				</div>
+			{% endif %}
+			{% endfor %}
+		{% else %}
+			<div id="HomeBackground" style="background-color:rgb(217,94,27);background-image: url('/refs/wall2.jpg')"></div>
+			
+			<div class="gn-thesisMsg">
+				<div class="gn-thesisHdr">:(</div>
+				<div class="gn-thesisCon">
+					<p>Creating student entries is not allowed unless you're signed in. If you wish to browse the list without signing in, click <a href="/student/list">here</a>.
+					</p>
+				</div>
+				<br>
+				<div>
+					<p>If you like to login, click Anonymous on the top-right side of the page then click Login.</p>
+				</div>
+			</div>
+		{% endif %}
+		</div>
+		<div class="clearfix"></div> 
+	</div>
+</div> 
+<script type="text/javascript" src="/js/coeteam17.js"></script> 
+<script type="text/javascript">
+	function checkInput(){
+		if($('input[name*="firstname"]').val() == "" || $('input[name*="lastname"]').val() == "" || $('input[name*="email"]').val() == "" || $('input[name*="number"]').val() == "" || $('textarea[name*="remarks"]').val() == "" ){
+			return false;
+		}
+		else{return true;}
+	}
+	$(document).ready(function(e){
+		$('#student_list').click(function(e){
+			e.preventDefault();
+			$('.uiModalTopButtons button').click();
+		});
+		$('#student_submit').click(function(e){
+			e.preventDefault();
+			$email = $('input[name*="email"]').val();
+			if(!checkInput()){
+				alert('Empty Fields\n\nMake sure all fields are not empty. Please try again.');
+			}
+			else if(!isEmail($email)){
+				alert('Email Invalid\n\nEmail you have entered is not valid. Please try again.');
+			}
+			else{$('form').submit();}
+		});
+	});
+</script>

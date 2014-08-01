@@ -1,0 +1,113 @@
+<div id="pageContainer" style="border-top: 1px #AAA solid"> 
+	<div id="pageBody" > 
+		<div class="containerMain"> 
+		{% if user_name %}
+			{% for list in adviserList %}
+			{% if (list.key.id() == id) %}
+				<div id="gn-thesis" class="span8" style="margin:0 auto">
+							<form method="post" action="/adviser/edit/{{id}}">
+								<input type="hidden" value="{{ user_name }}" name="author">
+								<div class="gridCol-12 gridCol-child">
+									<div class="span2 gridAsLabel"><strong>Title</strong></div>
+									<div class="span3"><select class="span2"  name="adviser_title" >
+										<option value="Mr.">Mr.</option>
+										<option value="Ms.">Ms.</option>
+										<option value="Mrs.">Mrs.</option>
+										<option value="Dr.">Dr.</option>
+										<option value="Engr.">Engr.</option>
+									</select></div>
+								</div>
+								<div class="gridCol-12 gridCol-child">
+									<div class="span2 gridAsLabel"><strong>First Name</strong></div>
+									<div class="span3"><input class="span4" type="text" name="adviser_firstname" value="{{list.adviser_firstname}}"/></div>
+								</div>
+								<div class="gridCol-12 gridCol-child">
+									<div class="span2 gridAsLabel"><strong>Last Name</strong></div>
+									<div class="span3"><input class="span4" type="text" name="adviser_lastname" value="{{list.adviser_lastname}}"/></div>
+								</div>
+								<div class="gridCol-12 gridCol-child">
+									<div class="span2 gridAsLabel"><strong>Email</strong></div>
+									<div class="span3"><input class="span4" type="email" name="adviser_email" value="{{list.adviser_email}}"/></div>
+								</div>
+								<div class="gridCol-12 gridCol-child">
+									<div class="span2 gridAsLabel"><strong>Phone number</strong></div>
+									<div class="span3"><input class="span4" type="text" name="adviser_phone" value="{{list.adviser_phone}}"/></div>
+								</div>
+								<div class="gridCol-12 gridCol-child">
+									<div class="span2 gridAsLabel"><strong>Department</strong></div>
+									<div class="span3"><select class="span4"  name="adviser_dept" >
+										<option value="Computer Engineering">Computer Engineering</option>
+										<option value="Electronics and Communication Engineering">Electronics and Communication Engineering</option>
+										<option value="Electrical Engineering">Electrical Engineering</option>
+										<option value="Industrial Engineering">Industrial Engineering</option>
+										<option value="Mechanical Engineering">Mechanical Engineering</option>
+										<option value="Civil Engineering">Civil Engineering</option>
+									</select></div>
+								</div>
+								<div class="gridCol-12 gridCol-child ">
+									<div class="span2"></div>
+									<div class="span5">
+										<button id="adviser_submit" type="submit" class="uiButtonVeryLarge uiButtonStandard"><i class="uiIcon-hl-send"></i> Submit</button>
+										<button type="reset" class="uiButtonVeryLarge"><i class="uiIcon-gi-refresh"></i> Reset</button>
+										<button id="adviser_list" class="uiButtonVeryLarge"><i class="uiIcon-gi-show_lines"></i> Adviser List</button>
+									</div>
+								</div>
+							</form>
+							<script type="text/javascript">								
+								function checkInput(){
+									if($('input[name*="firstname"]').val() == "" || $('input[name*="lastname"]').val() == "" || $('input[name*="email"]').val() == "" || $('input[name*="phone"]').val() == "" ){
+										return false;
+									}
+									else{return true;}
+								}
+								$(document).ready(function(e){
+									$('input[name="adviser_phone"]').keydown(function(e){
+										return isNumberKey(e);
+									});	
+									$('input[name="adviser_phone"]').keydown(function(e){
+										return isNumberKey(e);
+									});
+									$('#adviser_submit').click(function(e){
+										e.preventDefault();
+										$email = $('input[name*="email"]').val();
+										if(!checkInput()){
+											alert('Empty Fields\n\nMake sure all fields are not empty. Please try again.');
+										}
+										else if(!isEmail($email)){
+											alert('Email Invalid\n\nEmail you have entered is not valid. Please try again.');
+										}
+										else{$('form').submit();}
+									});
+								});
+							</script>
+						</div>
+			{% endif %}
+			{% endfor %}
+		{% else %}
+			<div id="HomeBackground" style="background-color:rgb(217,94,27);background-image: url('/refs/wall2.jpg')"></div>
+			
+			<div class="gn-thesisMsg">
+				<div class="gn-thesisHdr">:(</div>
+				<div class="gn-thesisCon">
+					<p>Creating student entries is not allowed unless you're signed in. If you wish to browse the list without signing in, click <a href="/student/list">here</a>.
+					</p>
+				</div>
+				<br>
+				<div>
+					<p>If you like to login, click Anonymous on the top-right side of the page then click Login.</p>
+				</div>
+			</div>
+		{% endif %}
+		</div>
+		<div class="clearfix"></div> 
+	</div>
+</div> 
+<script type="text/javascript" src="/js/coeteam17.js"></script> 
+<script type="text/javascript">
+	$(document).ready(function(e){
+		$('#adviser_list').click(function(e){
+			e.preventDefault();
+			$('.uiModalTopButtons button').click();
+		});
+	})
+</script>

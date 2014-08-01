@@ -1,0 +1,76 @@
+body{background: #FEFEFE;}
+iframe {border:1px solid #DDD;border-top:0;}
+iframe.frameHwks {width:100%;height: 400px}
+ .hwTabber div:last-child{ margin-top: -26px}
+ textarea{ width: 100%}
+
+#buttonAlignment {}
+#buttonAlignment button {margin-top:-2px !important; background: none; border-color: transparent; color: inherit;}
+#buttonAlignment button:hover {border-color: #000;opacity: 1;filter:none;background: #FFF;color: #222}
+.uiHeaderDark #buttonAlignment button:hover {border-color: #FFF}
+#buttonAlignment button:active , #buttonAlignment button:focus, #buttonAlignment button.active{ background-color:  #FFF; color: #222; background-image:  none; filter: none; }
+ #gn-ftr-social i{font-size: 16px;}
+#gn-ftr-gbname, #gn-ftr-social {display: inline-block;}
+#gn-ftr-social {}
+#gn-ftr-gbname  form{margin: 0px}
+#gn-ftr-gbname .textAppended{ color: #222}
+ #pageBody.gn-profiler{ margin: 0;padding: 0; padding-bottom: 80px; }
+.gn-profilerCover{ height:200px;background:#4a3bac;top:0; background-size:cover;background-repeat:no-repeat;background-position:center; background-image: url('http://wallpaperest.com/wallpapers/star-wars-lego-figurines-digital-art_087463.jpg'); -webkit-box-shadow: 0 10px 10px rgba(255, 255, 255, .3), 0 0 0 1px rgba(192, 192, 192, .1); -moz-box-shadow: 0 10px 10px rgba(255, 255, 255, .3), 0 0 0 1px rgba(192 192, 192, .1); box-shadow: 0 10px 10px rgba(255, 255, 255, .3), 0 0 0 1px rgba(192, 192, 192, .1); }
+.gn-profilerCover > div{ width:1024px; margin: 0 auto; }
+.gn-profileName{ color: #f3f1e9; position: absolute; margin-top: 140px; margin-left: 200px; margin-bottom: 14px; cursor: default; font-size: 24px; text-shadow: -1px -1px 2px #000, 1px -1px 2px #000, -1px 1px 2px #000, 1px 1px 2px #000;  }
+.gn-profiletagLine{ font-size: 14px; font-style: italic; }
+.gn-profileImg{ height: 133px; width: 133px; background: rgba(122,122,122,0.5); position: absolute; margin-left: 40px; margin-top: 90px; border: 4px solid rgba(255,255,255,0.8); box-shadow: 0px 0px 3pt 2pt #555; -webkit-box-shadow: 0px 0px 3pt 2pt #555; -moz-box-shadow: 0px 0px 3pt 2pt #555; border-radius: 50%;  }
+.gn-profileImg img{ overflow: hidden; height: 125px; width: 128px; border-radius: 50%; }
+.gn-profilerNav{ background: #e8e8e8; margin: 0 auto; border-bottom: 1px solid #a8a8a8; }
+.gn-profilerNav > div > ul{ width: 824px; margin: 0; margin-left: 200px; }
+.gn-profilerNav > div, .gn-profilerContent{ width: 1024px; margin: 0 auto; }
+ .gn-profilerContent{ margin-top: 10px; }
+.gn-profilerNav > div > ul.uiNav > li > a { margin: 0; padding: 12px 20px; border-radius: 0; font-size: 14px; text-align: center; }
+.gn-hdrContainer.containerMain{ margin: 0 auto;padding: 0; }
+.gn-hdrRightFloat { top:0; margin: 0; padding: 0; border-radius: .5em 0 0 .5em }
+.gn-hdrRightFloat span{ top:0; margin-top: -5px; display: inline; }
+ #gn-tabs #about, #gn-tabs #contact{ display: none;}
+ .gn-hdrSubTitle{border-right:1px solid #FFF;padding:4px 5px 4px 0px;margin-right:-4px}
+
+ [name="thesis_desc"] {height:200px;max-height: 200px;}
+#HomeBackground {
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: fixed;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	position: fixed;
+	z-index: -9999;
+}
+
+.gn-thesisMsg{
+	color:#FFF;margin:0 auto;width:800px;
+}
+.gn-thesisHdr{
+	font-size:150px;
+}
+.gn-thesisCon{
+	font-size:20px;
+}
+.gn-thesisMsg a{color: #FFF;border-bottom: 1px dotted #FFF;}
+.gn-thesisListTitle div{border-top: 1px #222 solid;}
+.gn-thesisListTitle div, .gn-thesisList div{margin: 0;margin-right:-3px;padding: 10px;}
+.gn-thesisList {border:1px solid #222;border-top: none;}
+
+.gn-thesisList div{ vertical-align: top;height: 100%;}
+.gn-thesisList a:hover {text-decoration: underline;}
+
+.gn-thesisList > div:nth-child(2), .gn-thesisList > div:nth-child(1), .gn-thesisList > div:nth-child(4){white-space: nowrap;overflow: hidden;text-overflow:ellipsis;}
+.gn-thesisList > div:nth-child(1){max-width:206px;}
+.gn-thesisList > div:nth-child(2){max-width:526px;}
+.gn-thesisList > div:nth-child(4){max-width:106px;}
+
+.uiTable {display: table}
+.uiTable-row {display: table-row;}
+.uiTable-row > div {display: table-cell;border-right: 1px #222 solid;border-bottom: 1px #222 solid;}
+.uiTable-row > div:first-child {border-left: 1px #222 solid;}
+.uiTable.striped > .uiTable-row:nth-child(even) {background: rgb(205,220,232)}
+.uiTable.striped > .uiTable-row:nth-child(odd) {background-color: #f8f8f8;}
+.uiTable.striped > .uiTable-row:hover {background-color: #f3f1e9;}

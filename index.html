@@ -1,0 +1,112 @@
+<!DOCTYPE html> {% autoescape true %} 
+<html> 
+	<head> 
+		<meta charset="utf-8" /> 
+		<link type="text/css" rel="stylesheet" href="/stylesheets/graphui-demo.css" /> 
+		<link type="text/css" rel="stylesheet" href="/stylesheets/coe2043.css" /> <script type="text/javascript" src="/js/jquery.js"></script> 
+		<title>University Information System | Home</title> 
+	</head> 
+	<body> 
+		<div id="HomeBackground" style="background-color:#222;background-image: url('/refs/wall4.jpg')"></div>
+		<div id="pageContainer"> 
+			<div id="pageHeader" class="uiHeaderDark"> 
+				<div class="containerMain"> 
+					<div> 
+						<span > 
+							<a href="/"><h5>University Information System</h5></a> 
+						</span>
+						<span id="buttonAlignment" class="uiDropdown uiDropdown-button pull-right" > 
+							<button  class="uiDropdown-selected uiButtonStandard"> {% if user_name %} <b>{{ user_name }} </b> {% else%} Anonymous {% endif %}<i class="uiIcon-hl-chevron-down"></i>
+							</button> 
+							<ul class="uiDropdown-menu pull-right"> 
+								<li class="uiDropdown-submenu pull-left">
+				                    <a tabindex="-1" href="#">Thesis</a>
+				                    <ul class="uiDropdown-menu">
+				                      {% if user_name%}<li><a tabindex="-1" href="/thesis/new">New Thesis</a></li>{% endif %}
+				                      <li><a tabindex="-1" href="/thesis/list">Thesis List</a></li>
+				                    </ul>
+				                </li>
+				                <li class="uiDropdown-submenu pull-left">
+				                    <a tabindex="-1" href="#">Student</a>
+				                    <ul class="uiDropdown-menu">
+				                      {% if user_name%}<li><a tabindex="-1" href="/student/new">New Student</a></li>{% endif %}
+				                      <li><a tabindex="-1" href="/student/list">Student List</a></li>
+				                    </ul>
+				                </li>
+				                <li class="uiDropdown-submenu pull-left">
+				                    <a tabindex="-1" href="#">Adviser</a>
+				                    <ul class="uiDropdown-menu">
+				                      {% if user_name%}<li><a tabindex="-1" href="/adviser/new">New Adviser</a></li>{% endif %}
+				                      <li><a tabindex="-1" href="/adviser/list">Adviser List</a></li>
+				                    </ul>
+				                </li>
+								<li class="divider"></li> 
+								<li><a href="{{ url|safe }}">{{ url_linktext }}</a></li> 
+							</ul>
+						</span>
+					</div> 
+				</div> 
+			</div> 
+			<div id="pageBody"> 
+				<div class="containerMain" style="color:#f3f1e9"> 
+					 	<div class="gridCol-12">
+					 		<div  class="gridCol-12">
+					 			
+					 		</div>
+					 		<div class="clearfix">
+					 			<center>
+					 			{% if user_name%}
+					 				<h3>What do you want to do?</h3>
+						 			<button class="uiButtonVeryLarge uiButtonStandard" onclick="window.location.href = '/thesis/new'"><i class="uiIcon-gi-book"></i> New Thesis</button>
+									<button class="uiButtonVeryLarge uiButtonStandard" onclick="window.location.href = '/student/new'"><i class="uiIcon-gi-user_add"></i> New Student</button>
+									<button class="uiButtonVeryLarge uiButtonStandard" onclick="window.location.href = '/adviser/new'"><i class="uiIcon-gi-user_add"></i> New Adviser</button>
+								{% else %}
+								<h3>Welcome to University Information System!</h3>
+
+									<br>
+									<button class="uiButtonVeryLarge uiButtonStandard" onclick="window.location.href = '{{url}}'"><i class="uiIcon-gi-keys"></i> Login</button>
+									<br>
+								{% endif %}
+									<br>
+									<h3>or</h3>
+									<br>
+
+						 			<button class="uiButtonVeryLarge uiButtonStandard" onclick="window.location.href = '/thesis/list'"><i class="uiIcon-gi-show_lines"></i> List Thesis</button>
+									<button class="uiButtonVeryLarge uiButtonStandard" onclick="window.location.href = '/student/list'"><i class="uiIcon-gi-show_lines"></i> List Student</button>
+									<button class="uiButtonVeryLarge uiButtonStandard" onclick="window.location.href = '/adviser/list'"><i class="uiIcon-gi-show_lines"></i> List Adviser</button>
+
+								
+								
+								</center>
+					 		</div>
+					 	</div>
+				</div> 
+			</div>
+			<div id="pageFooter" class="uiHeaderLight">
+				<div class="containerMain">
+				<div class="">
+					<div id="gn-ftr-gbname" class="" style="display:none">
+						<form>
+					      <div class="uiButtonAppend">
+					      	  <span class="textAppended"><i class="uiIcon-gi-pencil"></i> Guestbook name</span>
+						      <input type="text" value="{{ guestbook_name }}" name="guestbook_name">
+						      <input class="uiButton" type="submit" value="switch">
+					      </div>
+					    </form>
+					</div>
+					<div id="gn-ftr-social" class="gridCol-offset-8">
+						<span>Developed by
+							<a href="/module-1/1">Joseph Petilla</a>
+							and
+							<a href="/module-1/2">Abrian Mampusti</a>
+						</span>
+
+					</div>
+				</div>
+			</div>
+			</div> 
+		</div> 
+		<script type="text/javascript" src="/js/coeteam17.js"></script> 
+	</body> 
+</html> 
+{% endautoescape %}
